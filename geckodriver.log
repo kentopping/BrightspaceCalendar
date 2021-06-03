@@ -1,0 +1,20 @@
+1621431059964	geckodriver	INFO	Listening on 127.0.0.1:55471
+1621431059975	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileO1L3fR"
+1621431064758	Marionette	INFO	Listening on port 44313
+1621431064806	Marionette	WARN	TLS certificate errors will be ignored for this session
+1621431067071	Marionette	INFO	Stopped listening on port 44313
+1621431123615	geckodriver	INFO	Listening on 127.0.0.1:44961
+1621431123626	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile42g1IE"
+1621431127884	Marionette	INFO	Listening on port 40675
+1621431127968	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://login.microsoftonline.com"
+1621431149900	Marionette	INFO	Stopped listening on port 40675
+1621431227532	geckodriver	INFO	Listening on 127.0.0.1:53261
+1621431227541	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileoq1KU9"
+1621431230938	Marionette	INFO	Listening on port 46875
+1621431231001	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://login.microsoftonline.com"
+console.error: "Store does not have a valid reducer. Make sure the argument passed to combineReducers is an object whose values are reducers."
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
