@@ -1,0 +1,22 @@
+create a google account
+
+go to https://console.cloud.google.com/
+click the dropdown menu to the right of "Google Cloud Platform"
+click new project in the top right, give it a name. Organization is not required
+click the drop down and click the newly made project
+click the drop down menu to the left of "Google Cloud Platform", mouse over API's & Services and click Credentials
+click "+ CREATE CREDENTIALS", click "OAuth client ID"
+click configure concent screen, select external, click CREATE
+fill in the required fields and click SAVE AND CONTINUE twice
+click + ADD USERS, enter your google email address you want to use
+click ADD, then SAVE AND CONTINUE, then BACK TO DASHBOARD
+click "+ CREATE CREDENTIALS", click "OAuth client ID"
+application type is Desktop app, click create then click ok
+now download Desktop client 1's json credentials and rename the file credentials.json
+add the file to the project folder
+click on dashboard in the left hand menu
+click + Enable APIs AND SERVICES
+search calendar, click and enable the first one that shows up
+
+
+you're done
