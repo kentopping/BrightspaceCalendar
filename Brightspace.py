@@ -1,7 +1,6 @@
 import csv
 import re
 from os import path
-import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
@@ -11,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 
 
 class BrightSpace(object):
-    def __init__(self):
+    def __init__(self, courses):
         self.PATH = "chromedriver"
         chrome_options = Options()
         chrome_options.add_argument("--headless")
@@ -20,14 +19,11 @@ class BrightSpace(object):
         self.Lab_list = []
         self.Due_list = []
         self.courseCodes = []
-        self.setCourses()
+        self.setCourses(courses)
 
-    def setCourses(self):
-        self.courseCodes.append("CST8276_013")
-        self.courseCodes.append("CST8276_010")
-        self.courseCodes.append("CST8277_300")
-        self.courseCodes.append("CST8277_303")
-        self.courseCodes.append("CST8334_300")
+    def setCourses(self, courses):
+        for course in courses:
+            self.courseCodes.append(course)
 
 
 
