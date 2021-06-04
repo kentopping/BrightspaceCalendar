@@ -1,5 +1,6 @@
 on linux run:
 1. sudo apt install chromium-driver
+2. if theres trouble with the driver go https://chromedriver.chromium.org/downloads, click the version of chrome you have, download and replace chromedriver in BrightspaceCalendar folder
 
 on windows replace the chromedriver with a windows chromedriver 
 1. check the verison of chrome you have by clicking the 3 dot drop down under the X button, hover over help and click about chrome
