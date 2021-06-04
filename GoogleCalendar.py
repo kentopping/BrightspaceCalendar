@@ -45,6 +45,7 @@ class GoogleClient(object):
         self.calendars = ret
 
     def erase_calendar(self, calendar_name):
+        self.get_calendars()
         calendar_id = self.calendars.get(f'{calendar_name}')
         # gets all events by calendar id
         result = self.service.events().list(calendarId=calendar_id, timeZone="Canada/Eastern").execute()
@@ -52,40 +53,63 @@ class GoogleClient(object):
         for i in result['items']:
             self.service.events().delete(calendarId=calendar_id, eventId=i['id']).execute()
 
-    def create_event(self, calendar_id, summary, end, start_time):
+    def create_event(self, calendar_id, summary, end, start_time, calendar):
         end_time = start_time + timedelta(hours=end)
         timezone = 'Canada/Eastern'
-
-        event = {
-            'summary': f'{summary}',
-            'start': {
-                'dateTime': start_time.strftime("%Y-%m-%dT%H:%M:%S"),
-                'timeZone': timezone,
-            },
-            'end': {
-                'dateTime': end_time.strftime("%Y-%m-%dT%H:%M:%S"),
-                'timeZone': timezone,
-            },
-            'reminders': {
-                'useDefault': False,
-                'overrides': [
-                    {'method': 'popup', 'minutes': 24 * 60},
-                    {'method': 'popup', 'minutes': 10},
-                ],
-            },
-        }
-        self.service.events().insert(calendarId=calendar_id, body=event).execute()
+        if calendar == "Assignments":
+            event = {
+                'summary': f'{summary}',
+                'start': {
+                    'dateTime': start_time.strftime("%Y-%m-%dT%H:%M:%S"),
+                    'timeZone': timezone,
+                },
+                'end': {
+                    'dateTime': end_time.strftime("%Y-%m-%dT%H:%M:%S"),
+                    'timeZone': timezone,
+                },
+                'reminders': {
+                    'useDefault': False,
+                    'overrides': [
+                        {'method': 'popup', 'minutes': 24 * 60},
+                        {'method': 'popup', 'minutes': 24 * 60 * 3},
+                        {'method': 'popup', 'minutes': 24 * 60 * 7},
+                    ],
+                },
+            }
+            self.service.events().insert(calendarId=calendar_id, body=event).execute()
+        else:
+            event = {
+                'summary': f'{summary}',
+                'start': {
+                    'dateTime': start_time.strftime("%Y-%m-%dT%H:%M:%S"),
+                    'timeZone': timezone,
+                },
+                'end': {
+                    'dateTime': end_time.strftime("%Y-%m-%dT%H:%M:%S"),
+                    'timeZone': timezone,
+                },
+                'reminders': {
+                    'useDefault': False,
+                    'overrides': [
+                        {'method': 'popup', 'minutes': 24 * 60},
+                        {'method': 'popup', 'minutes': 10},
+                    ],
+                },
+            }
+            self.service.events().insert(calendarId=calendar_id, body=event).execute()
 
     def create_calendars(self, calendar_name):
         for name in self.calendars:
             if name == calendar_name:
+                print(f"\nUpdating {calendar_name}")
                 return
+
+        print(f"\nCreating {calendar_name} in Calendars")
         calendar = {
             'summary': f'{calendar_name}',
             'timeZone': 'Canada/Eastern'
         }
         created_calendar = self.service.calendars().insert(body=calendar).execute()
-        self.get_calendars()
 
     def add_events(self, file, csv_name):
         for line in file:
@@ -109,4 +133,4 @@ class GoogleClient(object):
 
     def create(self, calendar, name, duration, start):
         calendar_id = self.calendars.get(f'{calendar}')
-        self.create_event(calendar_id, f'{name}', duration, start)
+        self.create_event(calendar_id, f'{name}', duration, start, calendar)
