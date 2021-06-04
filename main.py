@@ -4,7 +4,8 @@ from Brightspace import BrightSpace
 
 
 def main():
-    client = GoogleClient('../credentials.json')
+    # credentials.json should be in this folder
+    client = GoogleClient('credentials.json')
     data = DTO()
     courses = data.read_txt("courses.txt")
     brightspace = BrightSpace(courses)
