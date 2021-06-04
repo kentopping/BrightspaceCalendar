@@ -3,7 +3,6 @@ import datetime
 import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from datetime import datetime, timedelta
 
@@ -13,7 +12,8 @@ class GoogleClient(object):
         # If modifying these scopes, delete the file token.json.
         self.SCOPES = ['https://www.googleapis.com/auth/calendar']
         self.service = self.authorize(creds_location)
-        self.calendars = self.get_calendars()
+        self.calendars = None
+        self.get_calendars()
 
     def authorize(self, creds_location):
         """Shows basic usage of the Google Calendar API.
@@ -23,14 +23,14 @@ class GoogleClient(object):
         # The file token.json stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
         # time.
-        if os.path.exists('../token.json'):
-            creds = Credentials.from_authorized_user_file('../token.json', self.SCOPES)
+        if os.path.exists('token.json'):
+            creds = Credentials.from_authorized_user_file('token.json', self.SCOPES)
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
             flow = InstalledAppFlow.from_client_secrets_file(creds_location, self.SCOPES)
             creds = flow.run_local_server(port=0)
             # Save the credentials for the next run
-            with open('../token.json', 'w') as token:
+            with open('token.json', 'w') as token:
                 token.write(creds.to_json())
 
         service = build('calendar', 'v3', credentials=creds)
@@ -42,7 +42,7 @@ class GoogleClient(object):
         for i in result['items']:
             if i['summary'] == "Theory" or i['summary'] == "Assignments" or i['summary'] == "Labs":
                 ret[f"{i['summary']}"] = f"{i['id']}"
-        return ret
+        self.calendars = ret
 
     def erase_calendar(self, calendar_name):
         calendar_id = self.calendars.get(f'{calendar_name}')
@@ -85,6 +85,7 @@ class GoogleClient(object):
             'timeZone': 'Canada/Eastern'
         }
         created_calendar = self.service.calendars().insert(body=calendar).execute()
+        self.get_calendars()
 
     def add_events(self, file, csv_name):
         for line in file:
