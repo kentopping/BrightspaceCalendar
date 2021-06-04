@@ -12,6 +12,8 @@ class DTO:
         array = []
         if path.exists(f"{name}"):
             file = open(f"{name}", "r")
+        else:
+            print(f"{name} is not in the current directory")
         for f in file:
             f = f.rstrip("\n")
             array.append(f)
@@ -22,6 +24,8 @@ class DTO:
         if path.exists(f"{name}.csv"):
             file = open(f"{name}.csv", "r")
             self.file = file
+        else:
+            print(f"{name} is not in the current directory")
 
     def delete_csv(self, array):
         for name in array:
