@@ -15,17 +15,20 @@ def main():
         subprocess.run("pip install webdriver-manager", capture_output=True)
     except:
         print("\nError: make sure pip and python3 is properly installed")
+
     try:
         # credentials.json should be in this folder
         client = GoogleClient('credentials.json')
     except:
         print("\nError: credentials.json needs to be in the current folder")
+
     try:
         data = DTO()
         email = input("\nEnter algonquin email: ")
         password = input("\nEnter your password: ")
     except:
         print("\nError: Problem getting email and password")
+
     courses = data.read_txt("courses.txt")
     brightspace = BrightSpace(courses)
     array = ['Theory', 'Labs', 'Assignments']
@@ -37,7 +40,6 @@ def main():
         print("\nError: A problem occurred while trying to getting brightspace calendar info.")
     try:
         for sub in array:
-            print(f'\nUpdating {sub} calendar.')
             data.read_csv(sub)
             file = data.get_file()
             client.create_calendars(sub)
@@ -45,6 +47,7 @@ def main():
             client.add_events(file, sub)
     except:
         print("\nError: A problem occurred while trying to add calendar info to google calendars")
+
     print("\nUpdated!")
 
 
@@ -54,6 +57,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\nKeyboard interrupted ")
     except:
-        print("An Error Occurred")
+        print("\nAn Unknown Error Occurred")
 
     exit()
