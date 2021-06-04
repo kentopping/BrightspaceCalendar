@@ -14,7 +14,8 @@ class BrightSpace(object):
         self.PATH = "chromedriver"
         chrome_options = Options()
         chrome_options.add_argument("--headless")
-        self.driver = webdriver.Chrome(self.PATH, options=chrome_options)
+        chrome_options.add_argument("--log-level=3")
+        self.driver = webdriver.Chrome("chromedriver", options=chrome_options)
         self.Theory_list = []
         self.Lab_list = []
         self.Due_list = []
