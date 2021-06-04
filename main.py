@@ -7,12 +7,13 @@ def main():
     # credentials.json should be in this folder
     client = GoogleClient('credentials.json')
     data = DTO()
+    
+    email = input("\nEnter algonquin email: ")
+    password = input("\nEnter your password: ")
+    
     courses = data.read_txt("courses.txt")
     brightspace = BrightSpace(courses)
     array = ['Theory', 'Labs', 'Assignments']
-
-    email = input("\nEnter algonquin email: ")
-    password = input("\nEnter your password: ")
     data.delete_csv(array)
     print("\nGetting calendar info.")
     brightspace.start(email, password)
