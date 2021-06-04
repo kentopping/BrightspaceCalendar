@@ -1,8 +1,11 @@
-pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+run in directory either in cmd or pycharm terminal
+1. pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+2. pip install selenium
 
 on linux run:
-sudo apt install chromium-driver
+1. sudo apt install chromium-driver
 
-on windows replace the chromedriver with a windows chromedriver
-1. go to https://chromedriver.storage.googleapis.com/index.html?path=91.0.4472.19/ and download the windows zip
+on windows replace the chromedriver with a windows chromedriver that is the same version as 
+1. check the verison of chrome you have by clicking the 3 dot drop down under the X button, hover over help and click about chrome
+2. go to https://chromedriver.chromium.org/downloads, click the version of chrome you have and download the windows zip
 2. unzip and replace the chromedriver in the BrightspaceCalendar folder
